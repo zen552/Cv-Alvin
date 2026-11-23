@@ -31,7 +31,6 @@
     --radius: 20px;
 }
 
-/* DARK MODE */
 body.dark-mode {
     --primary: #3b82f6;
     --primary-dark: #60a5fa;
@@ -79,7 +78,7 @@ a { text-decoration:none; color:inherit; }
     margin:auto;
 }
 
-/* THEME CURTAIN ANIMATION */
+/* DIAGONAL CURTAIN ANIMATION */
 .curtain {
     position:fixed;
     inset:0;
@@ -187,7 +186,6 @@ nav {
 
 .nav-button:hover { background:var(--primary-dark); }
 
-/* THEME BUTTON */
 .theme-toggle {
     width:43px;
     height:43px;
@@ -929,13 +927,14 @@ footer {
 
 <body>
 
-<!-- CURTAIN OVERLAY -->
 <div class="curtain" id="curtain"></div>
 
 <!-- NAVIGATION -->
 <nav>
     <div class="container nav-inner">
-        <a href="#home" class="logo">alvin<span>.</span></a>
+
+        <!-- LOGO: ALVIN DENGAN HURUF A KAPITAL -->
+        <a href="#home" class="logo">Alvin<span>.</span></a>
 
         <div class="nav-right">
             <button class="theme-toggle" id="themeToggle" aria-label="Aktifkan mode gelap" title="Ganti tema">
@@ -1185,16 +1184,14 @@ footer {
 <!-- FOOTER -->
 <footer>
     <div class="container footer-inner">
-        <div class="footer-logo">alvin.</div>
+        <div class="footer-logo">Alvin.</div>
         <p>© <span id="year"></span> Alvin Bungur. Designed with passion.</p>
         <a href="#home" class="back-top" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></a>
     </div>
 </footer>
 
 <script>
-// ========================================
 // THEME SYSTEM
-// ========================================
 
 const themeToggle = document.getElementById('themeToggle');
 const curtain = document.getElementById('curtain');
@@ -1202,7 +1199,6 @@ const body = document.body;
 
 let currentTheme = localStorage.getItem('alvin-theme') || 'light';
 
-// Set initial theme without animation
 function applyTheme(theme) {
     body.classList.toggle('dark-mode', theme === 'dark');
 
@@ -1218,10 +1214,10 @@ function applyTheme(theme) {
     currentTheme = theme;
 }
 
-// Initialize theme
+// Initial theme
 applyTheme(currentTheme);
 
-// Toggle with diagonal curtain animation
+// Theme toggle with diagonal curtain
 themeToggle.addEventListener('click', () => {
     if (curtain.classList.contains('active')) return;
 
@@ -1230,26 +1226,21 @@ themeToggle.addEventListener('click', () => {
     curtain.classList.remove('opening');
     curtain.classList.add('active');
 
-    // Change theme while covered
     setTimeout(() => {
         applyTheme(newTheme);
         localStorage.setItem('alvin-theme', newTheme);
     }, 400);
 
-    // Open the diagonal curtains
     setTimeout(() => {
         curtain.classList.add('opening');
     }, 750);
 
-    // Reset animation
     setTimeout(() => {
         curtain.classList.remove('active', 'opening');
     }, 1450);
 });
 
-// ========================================
 // MOBILE NAVIGATION
-// ========================================
 
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
@@ -1271,9 +1262,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// ========================================
 // SCROLL REVEAL
-// ========================================
 
 const revealElements = document.querySelectorAll('.reveal');
 
@@ -1292,15 +1281,11 @@ revealElements.forEach(element => {
     revealObserver.observe(element);
 });
 
-// ========================================
 // FOOTER YEAR
-// ========================================
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ========================================
 // NAVBAR SCROLL EFFECT
-// ========================================
 
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('nav');
